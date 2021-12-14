@@ -8,6 +8,7 @@ module.exports = function (app, opts) {
   app.get('/', (req, res) => {
     res.locals.name = 'Divvy React Challenge'
     res.render('index')
+    // res.status(200).json({message: "get this requested successfully"})
   })
 
   // GraphQL routes

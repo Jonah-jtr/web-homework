@@ -9,7 +9,7 @@ export function Home () {
   if (loading) {
     return (
       <Fragment>
-        Loading...
+        Loading... Please Wait...
       </Fragment>
     )
   }

@@ -6,7 +6,7 @@
 
 2. Run `yarn` in /webserver (this directory)
 
-3. Run `yarn start` in /webserver
+3. Run `yarn start` in  /webserver
 
 You can also install **nodemon** globally for hot reloading
 
