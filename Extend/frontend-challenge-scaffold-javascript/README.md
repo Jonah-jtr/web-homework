@@ -1,6 +1,6 @@
 # Jonah Tillman: Extend React Challenge
 
-Thank you for taking a look and giving me a shot!
+Thank you for taking a look, and giving me a shot!
 
 ## Extend React Challenge
 
