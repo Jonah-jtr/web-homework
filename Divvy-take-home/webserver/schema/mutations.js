@@ -20,6 +20,17 @@ const mutation = new GraphQLObjectType({
       resolve (parentValue, { user_id, description, merchant_id, debit, credit, amount }) {
         return (new TransactionModel({ user_id, description, merchant_id, debit, credit, amount })).save()
       }
+    },
+    removeTransaction: {
+      type: TransactionType,
+      args: {
+
+        amount: { type: GraphQLFloat }
+      },
+      /* eslint-disable-next-line camelcase */
+      resolve (parentValue, { user_id, description, merchant_id, debit, credit, amount }) {
+        return (new TransactionModel({ user_id, description, merchant_id, debit, credit, amount })).save()
+      }
     }
   }
 })

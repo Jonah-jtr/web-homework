@@ -13,7 +13,7 @@ module.exports = function main (options, cb) {
   // Set default options
   const ready = cb || function () { }
   const opts = Object.assign(
-    {
+    { 
       // Default options
     },
     options

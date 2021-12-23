@@ -9,5 +9,12 @@
   "private": false,
   "dependencies": {
     "react-hook-form": "^7.21.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/node": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "nodemon": "^2.0.15"
   }
 }
