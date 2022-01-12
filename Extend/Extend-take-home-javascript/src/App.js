@@ -1,9 +1,9 @@
-// import styled from '@emotion/styled' // if you want to use styled components, this is in the packages
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import chunk from "./utilities/chunk";
 import Puppies from "./components/Puppies";
 import Pagination from "./components/Pagination";
+
 const IMAGES_URL = "https://dog.ceo/api/breed/hound/images/random/55";
 /**
  *
@@ -19,44 +19,37 @@ const IMAGES_URL = "https://dog.ceo/api/breed/hound/images/random/55";
  *
  */
 
-function App({ imgURL }) {
-  const [pictures, setPictures] = useState([]);
-  const [loading, setLoading] = useState(false);
+function App() {
+  const [chunks, setChunks] = useState([[], []]);
   const [currPage, setCurrPage] = useState(1);
-  const [picsPerPage, setPicsPerPage] = useState(10);
-
+  const chunkSize = 10;
   useEffect(() => {
-    setLoading(true);
     axios
-      .get(imgURL)
+      .get(IMAGES_URL)
       .then((resp) => {
-        setPictures(resp.data.message);
-        setLoading(false);
-        console.log("hey");
+        const PicturesArray = chunk(resp.data.message, chunkSize);
+        setChunks(PicturesArray);
       })
       .catch((err) => {
-        console.log("error in axios call");
+        console.log("error in axios call", err);
       });
   }, []);
 
-  const indexOfLastPicture = currPage * picsPerPage;
-  const indexOfFirstPicture = indexOfLastPicture - picsPerPage;
-  const currentPics = pictures.slice(indexOfFirstPicture, indexOfLastPicture);
+  const pageNumbers = [];
+  for (let i = 0; i < chunks.length; i++) {
+    pageNumbers.push(i);
+  }
 
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   return (
     <div>
-      <header></header>
-      <div>
-        <Puppies pictures={currentPics} loading={loading} />
-      </div>
       <Pagination
-        currPage={currPage}
-        picsPerPage={picsPerPage}
-        totalPics={pictures.length}
         paginate={paginate}
+        currPage={currPage}
+        pageNumbers={pageNumbers}
       />
+      <Puppies currPage={currPage} chunks={chunks} chunkSize={chunkSize} />
     </div>
   );
 }
